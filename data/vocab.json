@@ -1,0 +1,108 @@
+{
+  "AuthenticityRead": [
+    "Likely Inflated",
+    "Looks Genuine",
+    "Not Assessed",
+    "Some Red Flags"
+  ],
+  "BudgetPreference": [
+    "Barter Only",
+    "Not Yet Decided",
+    "Open to Either",
+    "Paid Only"
+  ],
+  "CampaignObjective": [
+    "Brand Awareness",
+    "Event/Occasion Promotion",
+    "Footfall/Walk-ins",
+    "New Menu/Launch Push",
+    "Social Proof/UGC",
+    "Weekday Footfall Boost"
+  ],
+  "ContentCategory": [
+    "Cafe/Restaurant Vlog",
+    "Comedy/Skit (Food Angle)",
+    "Food Review/Taste-Test",
+    "Lifestyle + Occasional Food",
+    "Other",
+    "Pure Aesthetic/Photography",
+    "Travel + Food"
+  ],
+  "ContentTone": [
+    "Aesthetic/Calm",
+    "Desi/Relatable",
+    "Fun/Energetic",
+    "Informative/Reviewer",
+    "Luxury/Aspirational",
+    "Other",
+    "Witty/Comedic"
+  ],
+  "ContentTonePref": [
+    "Aesthetic/Calm",
+    "Desi/Relatable",
+    "Fun/Energetic",
+    "Informative/Reviewer",
+    "Luxury/Aspirational",
+    "Witty/Comedic"
+  ],
+  "Eligibility": [
+    "Eligible",
+    "Incomplete - Exclude"
+  ],
+  "FeaturesFrequency": [
+    "No",
+    "Occasionally",
+    "Yes"
+  ],
+  "FollowerTrend": [
+    "Declining",
+    "Growing",
+    "Stable",
+    "Unknown"
+  ],
+  "PostingPaceCategory": [
+    "High (every 1-3 days)",
+    "Inactive (15+ days)",
+    "Insufficient Data",
+    "Low (every 8-14 days)",
+    "Moderate (every 4-7 days)"
+  ],
+  "PreferredFormat": [
+    "In-feed Post",
+    "Reel + Story Combo",
+    "Reels",
+    "Stories",
+    "Video Review (YouTube-style)"
+  ],
+  "PriceBracket": [
+    "Budget (Under Rs 500 for two)",
+    "Fine Dine (Above Rs 2500 for two)",
+    "Mid (Rs 500-1200 for two)",
+    "Premium (Rs 1200-2500 for two)"
+  ],
+  "ProductionStyle": [
+    "Casual/Raw (phone-shot, authentic)",
+    "High Production (edited, reels-first)",
+    "Mixed"
+  ],
+  "RateBand": [
+    "Above Rs 20,000",
+    "Barter Only",
+    "Rs 3,000 - Rs 8,000",
+    "Rs 8,000 - Rs 20,000",
+    "Under Rs 3,000",
+    "Unknown/Not Shared"
+  ],
+  "Status": [
+    "Committed to Pilot",
+    "Declined",
+    "Interested - In Discussion",
+    "Not Yet Contacted",
+    "Pilot Complete",
+    "Pilot Live"
+  ],
+  "YesNo": [
+    "No",
+    "Yes"
+  ]
+}

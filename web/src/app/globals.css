@@ -1,0 +1,105 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Design tokens. One accent (ultramarine) for scores and actions; green/amber are reserved for confidence. */
+:root {
+  --background: #f6f7f9;
+  --foreground: #15171c;
+  --card: #ffffff;
+  --card-foreground: #15171c;
+  --popover: #ffffff;
+  --popover-foreground: #15171c;
+  --primary: #3247d1;
+  --primary-foreground: #ffffff;
+  --secondary: #eef0f4;
+  --secondary-foreground: #15171c;
+  --muted: #eef0f4;
+  --muted-foreground: #5c6270;
+  --accent: #eef0f4;
+  --accent-foreground: #15171c;
+  --destructive: #b42318;
+  --border: #e3e6eb;
+  --input: #d5d9e0;
+  --ring: #3247d1;
+  --radius: 0.75rem;
+
+  /* Confidence */
+  --verified: #1a7f4b;
+  --verified-bg: #e7f5ec;
+  --inferred: #8f5400;
+  --inferred-bg: #fdf1dc;
+
+  /* Score segments: weighted contribution of each factor, three steps of the accent */
+  --seg-locality: #3247d1;
+  --seg-content: #7c8be8;
+  --seg-engagement: #b9c2f2;
+  --track: #eceef3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-verified: var(--verified);
+  --color-verified-bg: var(--verified-bg);
+  --color-inferred: var(--inferred);
+  --color-inferred-bg: var(--inferred-bg);
+  --color-seg-locality: var(--seg-locality);
+  --color-seg-content: var(--seg-content);
+  --color-seg-engagement: var(--seg-engagement);
+  --color-track: var(--track);
+
+  --font-sans: var(--font-plex);
+  --font-heading: var(--font-plex);
+
+  /* Type scale: 12 / 13 / 15 / 18 / 22 / 28 */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.8125rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 0.9375rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.625rem;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.75rem;
+  --text-2xl--line-height: 2.125rem;
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.25);
+  --radius-4xl: 999px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground text-base antialiased;
+  }
+}

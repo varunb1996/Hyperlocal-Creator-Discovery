@@ -1,0 +1,22 @@
+# Secrets: real keys live only in local .env files and in Render/Vercel settings
+.env
+.env.*
+!.env.example
+
+# Creator data with real names/handles: kept local, never published (see README > Data)
+data/creator_workbook.xlsx
+~$*.xlsx
+
+# Local run outputs (contain machine-specific paths)
+test_output.txt
+verification_*.txt
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Local tool settings
+.claude/

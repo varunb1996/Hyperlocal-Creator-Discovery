@@ -1,0 +1,18 @@
+# Render Blueprint for the FastAPI backend. Render -> New -> Blueprint -> pick this repo.
+# Secrets are NOT stored here: Render asks for them on first deploy (sync: false).
+services:
+  - type: web
+    name: creator-discovery-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
