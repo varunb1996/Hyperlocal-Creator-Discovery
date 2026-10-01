@@ -12,7 +12,7 @@ The ranking is **fully deterministic**: plain Python arithmetic, no LLM, same in
 - **Shows confidence, not just scores.** Green = measured or cross-checked, amber = inferred or not cross-checked. A creator whose Pune relevance is only inferred can never outrank one with a measured Pune audience.
 - **Explains every rank** in five plain lines (overall, location, content, engagement, estimated rate).
 - **Optional budget filter** (off by default) hides creators whose *estimated* rate is above the café's max spend. It only hides rows; it never re-orders or re-scores, and hidden higher ranks are listed with the reason.
-- **Saves every shortlist** with its brief, so it can be reopened by link.
+- **Saves every shortlist** with its brief; a **History** page lists past shortlists and reopens any of them.
 - **Pune pilot scope:** other cities are accepted but get a clear "not supported yet" message instead of a misleading list.
 
 ## Stack
@@ -46,7 +46,7 @@ See **[ARCHITECTURE.md](ARCHITECTURE.md)** for how it works and why, and **[DEPL
 │   ├── mapping_tables.xlsx   Free-text → vocabulary mapping (the normalization spec)
 │   ├── vocab.json            Fixed vocabulary, exported by seed.py (used by the API)
 │   └── creator_workbook.xlsx Creator data — PRIVATE, not in this repo (see Data)
-├── tests/            57 tests (pytest)
+├── tests/            60 tests (pytest)
 ├── web/              Next.js frontend
 ├── render.yaml       Render blueprint for the API
 └── .github/workflows/ci.yml
@@ -104,7 +104,7 @@ Open http://localhost:3000.
 python -m pytest -v
 ```
 
-With the workbook present, all 57 tests run (one also checks live Supabase when `SUPABASE_URL` is set). Without it — as on GitHub CI — data-dependent tests skip with a reason and the synthetic, validation-rule and API-boot tests still run.
+With the workbook present, all 60 tests run (one also checks live Supabase when `SUPABASE_URL` is set). Without it — as on GitHub CI — data-dependent tests skip with a reason and the synthetic, validation-rule and API-boot tests still run.
 
 ## Configuration
 
@@ -121,9 +121,11 @@ Scoring levers (weights, proxy cap, posting-pace map, tone-match matrix, ER rule
 
 | Method | Path | Description |
 |---|---|---|
+| `GET` | `/` | Redirects to `/docs` (interactive API docs) |
 | `GET` | `/health` | Liveness check |
 | `GET` | `/vocab` | Dropdown values for the form (tone, budget, objective, format, price) |
 | `POST` | `/shortlist` | Rank creators for a brief. Saves it unless `"save": false`. Returns top 5 (`top_n` to change) |
+| `GET` | `/shortlists` | Past shortlists, newest first (café name, area, city, tone, date); `limit` up to 200 |
 | `GET` | `/shortlist/{id}` | A saved shortlist, in the same shape as the POST response |
 
 Example request:

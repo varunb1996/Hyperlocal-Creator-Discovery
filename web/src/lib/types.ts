@@ -8,6 +8,17 @@ export type Vocab = {
   price_bracket: string[];
 };
 
+export type HistoryItem = {
+  shortlist_id: string;
+  created_at: string;
+  supported: boolean;
+  name: string | null;
+  area: string | null;
+  city: string;
+  tone_preference: string;
+  budget_preference: string;
+};
+
 export type CreatorRow = {
   rank: number;
   handle: string;

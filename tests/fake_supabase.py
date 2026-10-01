@@ -21,12 +21,21 @@ class FakeSupabase:
         table = request.url.path.rsplit("/", 1)[-1]
         rows = self.tables[table]
         if request.method == "GET":
+            params = request.url.params
             out = rows
-            for key, value in request.url.params.items():
+            for key, value in params.items():
                 if value.startswith("eq."):
                     out = [r for r in out if str(r.get(key)) == value[3:]]
-            if request.url.params.get("order") == "handle.asc":
-                out = sorted(out, key=lambda r: r["handle"])
+                elif value.startswith("in.("):
+                    wanted = set(value[4:-1].split(","))
+                    out = [r for r in out if str(r.get(key)) in wanted]
+            if order := params.get("order"):
+                col, direction = order.split(".")
+                out = sorted(out, key=lambda r: r[col], reverse=direction == "desc")
+            if limit := params.get("limit"):
+                out = out[: int(limit)]
+            if (select := params.get("select", "*")) != "*":
+                out = [{c: r.get(c) for c in select.split(",")} for r in out]
             return httpx.Response(200, json=out)
         if request.method == "POST":
             new = json.loads(request.content)

@@ -1,6 +1,6 @@
 // Server-side FastAPI client. Imported only by server components and server actions:
 // the browser never calls the API (or Supabase) directly.
-import type { ShortlistResponse, Vocab } from "./types";
+import type { HistoryItem, ShortlistResponse, Vocab } from "./types";
 
 const API_URL = process.env.API_URL;
 
@@ -35,7 +35,9 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const getVocab = () => call<Vocab>("/vocab");
 
-export const getShortlist = (id: string) => call<ShortlistResponse>(`/shortlist/${encodeURIComponent(id)}`);
+export const getHistory = () => call<HistoryItem[]>("/shortlists?limit=100");
+
+export const getShortlist =(id: string) => call<ShortlistResponse>(`/shortlist/${encodeURIComponent(id)}`);
 
 export const postShortlist = (brief: Record<string, unknown>) =>
   call<ShortlistResponse>("/shortlist", { method: "POST", body: JSON.stringify(brief) });

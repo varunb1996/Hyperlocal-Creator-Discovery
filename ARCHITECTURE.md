@@ -104,11 +104,11 @@ Row-level security is enabled with no policies: the public anon key can read not
 - **Mobile-first.** The primary use is showing a café owner the shortlist on a phone. Creators render as cards on phones and tablets, and as a TanStack table with a "why this rank" side panel on wide screens. No horizontal scrolling at 360–380px.
 - **Server-side data access.** Pages and Next.js server actions call FastAPI using the server-only `API_URL`; nothing is fetched from the browser.
 - **Confidence as visual language.** Green/amber badges for location and engagement; a split score bar shows each factor's weighted contribution.
-- **Routes**: `/` (brief form), `/shortlist/[id]` (saved shortlist; the budget toggle re-ranks with `save: false`).
+- **Routes**: `/` (brief form), `/shortlist/[id]` (saved shortlist; the budget toggle re-ranks with `save: false`), `/history` (past shortlists, newest first, dates in India time).
 
 ## Testing
 
-57 pytest tests cover normalization, validation rules, scoring guarantees (determinism, tier ordering, exclusions, ER outliers, partial credit, caps), the budget filter, scope guard, Supabase round-trip (via an in-memory PostgREST fake), PII stripping, and every API endpoint. Tests pick creators by their data (e.g. "highest ER"), never by name. CI runs the subset that does not need the private workbook, plus a frontend type-check, lint and production build.
+60 pytest tests cover normalization, validation rules, scoring guarantees (determinism, tier ordering, exclusions, ER outliers, partial credit, caps), the budget filter, scope guard, Supabase round-trip (via an in-memory PostgREST fake), PII stripping, the history list, and every API endpoint. Tests pick creators by their data (e.g. "highest ER"), never by name. CI runs the subset that does not need the private workbook, plus a frontend type-check, lint and production build.
 
 ## Decisions worth knowing
 

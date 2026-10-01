@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
-import Link from "next/link";
-
 import { Brand } from "@/components/brand";
+import { NavLinks } from "@/components/nav-links";
 import "./globals.css";
 
 const plex = IBM_Plex_Sans({
@@ -30,9 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="border-b bg-card">
           <nav aria-label="Main" className="mx-auto flex h-16 w-full max-w-2xl items-center justify-between gap-3 px-4 xl:max-w-7xl xl:px-8">
             <Brand />
-            <Link href="/" className="flex h-11 shrink-0 items-center rounded-lg px-3 text-sm font-medium text-primary hover:bg-accent">
-              New brief
-            </Link>
+            <NavLinks />
           </nav>
         </div>
         {children}

@@ -14,6 +14,7 @@ npm run dev                  # http://localhost:3000
 |---|---|
 | `src/app/page.tsx` | Brief form (dropdowns from `GET /vocab`) |
 | `src/app/shortlist/[id]/page.tsx` | Saved shortlist (`GET /shortlist/{id}`), or the not-supported message |
+| `src/app/history/page.tsx` | Past shortlists (`GET /shortlists`), each opening its `/shortlist/[id]` page |
 | `src/app/actions.ts` | Server actions: submit brief, re-rank for the budget toggle |
 | `src/lib/api.ts` | Server-side FastAPI client |
 | `src/components/results/` | Cards (phone), table + side panel (desktop), score bar, confidence badges |

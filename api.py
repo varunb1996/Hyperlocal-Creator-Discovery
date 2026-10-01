@@ -9,7 +9,8 @@ from pathlib import Path
 from typing import Optional
 from uuid import UUID
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, Field
 
 import config as cfg
@@ -50,6 +51,11 @@ def get_vocab():
 @lru_cache
 def get_db():
     return db.from_env()
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse("/docs")
 
 
 @app.get("/health")
@@ -99,6 +105,12 @@ def create_shortlist(brief: Brief, vocab=Depends(get_vocab), store=Depends(get_d
     if brief.save:
         brief_row, sl_row = db.save_shortlist(store, brief_row, sl_row)
     return _response(brief_row, sl_row)
+
+
+@app.get("/shortlists")
+def shortlist_history(limit: int = Query(50, ge=1, le=200), store=Depends(get_db)):
+    """Past shortlists, newest first (headline fields only; open one with GET /shortlist/{id})."""
+    return db.list_shortlists(store, limit)
 
 
 @app.get("/shortlist/{shortlist_id}")

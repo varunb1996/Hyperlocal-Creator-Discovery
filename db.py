@@ -94,6 +94,23 @@ def save_shortlist(db, brief, shortlist):
     return saved_brief, saved_shortlist
 
 
+def list_shortlists(db, limit=50):
+    """Newest shortlists with their brief's headline fields (no ranked rows, so it stays light)."""
+    shortlists = db.select("shortlists", select="id,brief_id,created_at,scope_message",
+                           order="created_at.desc", limit=str(limit))
+    if not shortlists:
+        return []
+    ids = ",".join(s["brief_id"] for s in shortlists)
+    briefs = {b["id"]: b for b in db.select("cafe_briefs", id=f"in.({ids})")}
+    out = []
+    for s in shortlists:
+        b = briefs.get(s["brief_id"], {})
+        out.append({"shortlist_id": s["id"], "created_at": s["created_at"], "supported": s["scope_message"] is None,
+                    "name": b.get("name"), "area": b.get("area"), "city": b.get("city"),
+                    "tone_preference": b.get("tone_preference"), "budget_preference": b.get("budget_preference")})
+    return out
+
+
 def get_shortlist(db, shortlist_id):
     """(brief row, shortlist row) or None."""
     found = db.select("shortlists", id=f"eq.{shortlist_id}")

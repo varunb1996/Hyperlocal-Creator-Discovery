@@ -17,7 +17,7 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       # The creator workbook is private, so data-dependent tests skip with a reason.
-      # The full suite (57 tests) runs locally with the data file present.
+      # The full suite (60 tests) runs locally with the data file present.
       - run: python -m pytest -v -rs
 
   frontend:
