@@ -3,7 +3,7 @@
 import { ChevronDown } from "lucide-react";
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { points, rateRange } from "@/lib/format";
+import { explanationOf, points, rateRange } from "@/lib/format";
 import type { CreatorRow } from "@/lib/types";
 
 import { ConfidenceBadges } from "./confidence";
@@ -60,7 +60,7 @@ export function CreatorCard({ row }: { row: CreatorRow }) {
           <ChevronDown aria-hidden className="size-4 transition-transform group-data-[panel-open]:rotate-180" />
         </CollapsibleTrigger>
         <CollapsibleContent className="px-4 pb-4">
-          <Explanation lines={row.explanation} />
+          <Explanation lines={explanationOf(row)} />
         </CollapsibleContent>
       </Collapsible>
     </article>

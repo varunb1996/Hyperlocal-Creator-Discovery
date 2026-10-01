@@ -32,7 +32,7 @@ export type CreatorRow = {
   engagement_capped: boolean;
   rate_band: string | null;
   rationale: string;
-  explanation: string[];
+  explanation?: string[]; // absent on shortlists saved before explanations existed
 };
 
 export type SkippedCreator = {

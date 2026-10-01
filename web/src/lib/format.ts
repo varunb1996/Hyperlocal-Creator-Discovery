@@ -11,6 +11,9 @@ export const rateFrom = (band: string | null) => band?.match(/₹[\d,]+/)?.[0] ?
 
 export const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
+/** "Why this rank" lines; older saved shortlists only have the one-line rationale. */
+export const explanationOf = (row: CreatorRow) => row.explanation ?? [row.rationale];
+
 /** Weighted contribution of each factor to the final score (they sum to final_score). */
 export function contributions(row: CreatorRow, weights = { locality: 50, content: 30, engagement: 20 }) {
   return {

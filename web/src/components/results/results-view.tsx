@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { Switch } from "@/components/ui/switch";
-import { inr, points, rateFrom, rateRange } from "@/lib/format";
+import { explanationOf, inr, points, rateFrom, rateRange } from "@/lib/format";
 import type { ShortlistResponse } from "@/lib/types";
 
 import { BriefSummary } from "./brief-summary";
@@ -139,7 +139,7 @@ export function ResultsView({
                   </p>
                 )}
                 <div className="mt-4 border-t pt-4">
-                  <Explanation lines={selected.explanation} />
+                  <Explanation lines={explanationOf(selected)} />
                 </div>
               </aside>
             </div>
