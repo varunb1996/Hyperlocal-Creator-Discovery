@@ -6,6 +6,17 @@ The ranking is **fully deterministic**: plain Python arithmetic, no LLM, same in
 
 ![CI](https://github.com/varunb1996/Hyperlocal-Creator-Discovery/actions/workflows/ci.yml/badge.svg)
 
+## Live
+
+| | Link |
+|---|---|
+| **App** (new brief) | https://hyperlocal-creator-discovery.vercel.app |
+| **Past shortlists** | https://hyperlocal-creator-discovery.vercel.app/history |
+| **API docs** (interactive) | https://creator-discovery-api-6p1r.onrender.com/docs |
+| **API health** | https://creator-discovery-api-6p1r.onrender.com/health |
+
+The API runs on Render's free plan and sleeps when idle: the first request after a quiet spell can take 30–50 seconds. Open the app a minute before a demo.
+
 ## What it does
 
 - **Ranks creators on three factors:** location fit (50%), content-tone match (30%) and engagement (20%).
