@@ -110,7 +110,7 @@ Row-level security is enabled with no policies: the public anon key can read not
 
 ## Testing
 
-69 pytest tests cover normalization, validation rules, scoring guarantees (determinism, tier ordering, exclusions, ER outliers, partial credit, caps, tie-breaking, authenticity dampening), the budget filter, scope guard, Supabase round-trip (via an in-memory PostgREST fake), PII stripping, the history list, and every API endpoint. Tests pick creators by their data (e.g. "highest ER"), never by name. CI runs the subset that does not need the private workbook, plus a frontend type-check, lint and production build.
+70 pytest tests cover normalization, validation rules, scoring guarantees (determinism, tier ordering, exclusions, ER outliers, partial credit, caps, tie-breaking, authenticity dampening), the budget filter, scope guard, Supabase round-trip (via an in-memory PostgREST fake), PII stripping, the history list, and every API endpoint. Tests pick creators by their data (e.g. "highest ER"), never by name. CI runs the subset that does not need the private workbook, plus a frontend type-check, lint and production build.
 
 ## Decisions worth knowing
 

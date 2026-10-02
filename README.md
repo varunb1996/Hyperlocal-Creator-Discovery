@@ -59,7 +59,7 @@ See **[ARCHITECTURE.md](ARCHITECTURE.md)** for how it works and why, and **[DEPL
 │   ├── mapping_tables.xlsx   Free-text → vocabulary mapping (the normalization spec)
 │   ├── vocab.json            Fixed vocabulary, exported by seed.py (used by the API)
 │   └── creator_workbook.xlsx Creator data — PRIVATE, not in this repo (see Data)
-├── tests/            69 tests (pytest)
+├── tests/            70 tests (pytest)
 ├── web/              Next.js frontend
 ├── render.yaml       Render blueprint for the API
 └── .github/workflows/ci.yml
@@ -117,7 +117,7 @@ Open http://localhost:3000.
 python -m pytest -v
 ```
 
-With the workbook present, all 69 tests run (one also checks live Supabase when `SUPABASE_URL` is set). Without it — as on GitHub CI — data-dependent tests skip with a reason and the synthetic, validation-rule and API-boot tests still run.
+With the workbook present, all 70 tests run (one also checks live Supabase when `SUPABASE_URL` is set). Without it — as on GitHub CI — data-dependent tests skip with a reason and the synthetic, validation-rule and API-boot tests still run.
 
 ## Configuration
 
