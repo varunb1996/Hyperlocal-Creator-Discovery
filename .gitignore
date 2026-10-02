@@ -20,3 +20,6 @@ venv/
 
 # Local tool settings
 .claude/
+
+# Exported documents (e.g. PDFs of the team guide) stay local
+*.pdf
