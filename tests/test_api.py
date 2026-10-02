@@ -105,7 +105,8 @@ def test_skipped_ranks_and_explanations_reported(ctx):
     assert f"Not shown because of budget: #1 {skipped[0]['handle']}" in body["budget"]["note"]
     assert fake.tables["shortlists"][-1]["filter_note"] == body["budget"]["note"]  # saved for outreach
     for r in body["rows"]:
-        assert len(r["explanation"]) == 5 and r["explanation"][0].startswith(f"Overall {round(r['final_score'] * 100)}/100")
+        assert r["explanation"][0].startswith(f"Overall {round(r['final_score'] * 100)}/100")
+        assert len(r["explanation"]) == 5 or r["explanation"][5].startswith("Tied on score")  # tie note when tied
 
 
 def test_no_skipped_note_when_filter_off(ctx):

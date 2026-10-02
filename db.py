@@ -20,6 +20,7 @@ CREATOR_FIELDS = {
     "posting_pace": "Posting Pace Category",
     "engagement_confidence": "engagement_confidence",
     "er_implausible": "er_implausible",
+    "authenticity": "authenticity",
     "rate_band": "Rate Band",
 }
 

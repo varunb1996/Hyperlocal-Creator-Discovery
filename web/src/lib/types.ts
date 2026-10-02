@@ -30,6 +30,8 @@ export type CreatorRow = {
   confidence: string;
   engagement_confidence: "verified" | "unverified";
   engagement_capped: boolean;
+  authenticity?: string | null; // audience authenticity read (absent on older shortlists)
+  authenticity_factor?: number; // engagement multiplier from it; < 1 = dampened
   rate_band: string | null;
   rationale: string;
   explanation?: string[]; // absent on shortlists saved before explanations existed

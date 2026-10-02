@@ -12,6 +12,7 @@ create table if not exists creators (
   posting_pace          text,
   engagement_confidence text not null check (engagement_confidence in ('verified', 'unverified')),
   er_implausible        boolean not null default false,
+  authenticity          text,                       -- enrichment's audience authenticity read (dampens engagement)
   rate_band             text,                       -- ESTIMATED rate range, display/filter only
   updated_at            timestamptz not null default now()
 );
@@ -44,6 +45,8 @@ create table if not exists shortlists (
 );
 -- Existing projects (created before `skipped` was added):
 alter table shortlists add column if not exists skipped jsonb not null default '[]';
+-- Existing projects (created before `authenticity` was added):
+alter table creators add column if not exists authenticity text;
 
 -- No policies: the anon key can read/write nothing. The backend uses the service-role key, which bypasses RLS.
 alter table creators    enable row level security;

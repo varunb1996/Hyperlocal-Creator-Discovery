@@ -62,14 +62,16 @@ def test_occasionally_gets_partial_proxy_credit():
 def test_er_outlier_keeps_top_engagement_without_flattening_others(pool, cafes):
     ranked = {r["handle"]: r for r in rank(pool, cafes["Qala Cafe & Co-works"])}
     top_er = max((c for c in pool if c["Username"] in ranked), key=lambda c: c["ER%"])["Username"]  # real 300%+ outlier
-    assert ranked[top_er]["engagement"] == max(r["engagement"] for r in ranked.values()) == 1.0
+    # The p95 ceiling is checked before the authenticity dampener: undo it to see the ceiling's own result.
+    pre = {h: r["engagement"] / r["authenticity_factor"] for h, r in ranked.items()}
+    assert pre[top_er] == pytest.approx(max(pre.values())) and pre[top_er] == pytest.approx(1.0)
 
     # ER component alone (engagement minus pace part): a ~12% creator must sit clearly above a ~4% one.
     # Against the raw max (302%) they were ~0.016 apart; against the p95 ceiling they spread out.
     creators = {c["Username"]: c for c in pool if c["Username"] in ranked}
     def er_part(handle):
         pace = cfg.PACE_SCORES.get(creators[handle]["Posting Pace Category"], 0)
-        return ranked[handle]["engagement"] - cfg.ENGAGEMENT_WEIGHTS["pace"] * pace
+        return pre[handle] - cfg.ENGAGEMENT_WEIGHTS["pace"] * pace
     near = lambda target: min(creators, key=lambda h: abs(creators[h]["ER%"] - target))
     assert er_part(near(0.12)) - er_part(near(0.04)) > 0.1
 

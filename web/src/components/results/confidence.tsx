@@ -27,6 +27,9 @@ export function ConfidenceBadges({ row, className }: { row: CreatorRow; classNam
     <div className={cn("flex flex-wrap gap-1.5", className)}>
       <ConfidenceBadge ok={locationOk}>{locationText}</ConfidenceBadge>
       <ConfidenceBadge ok={engagementOk}>{engagementOk ? "Engagement verified" : "Engagement unverified"}</ConfidenceBadge>
+      {(row.authenticity_factor ?? 1) < 1 && (
+        <ConfidenceBadge ok={false}>Authenticity: {row.authenticity?.toLowerCase()}</ConfidenceBadge>
+      )}
     </div>
   );
 }

@@ -78,9 +78,11 @@ The bands guarantee an inferred location never outranks a measured one.
 
 **Engagement**: `0.6 × ER part + 0.4 × posting pace`. ER is scaled against the **95th percentile** of the pool (capped at 1), so one real 300% outlier keeps the top score without flattening everyone else. Posting pace: High 1.0, Moderate 0.8, Low 0.4, Inactive 0.1, Insufficient 0.
 
+**Authenticity dampener (v2)**: the engagement sub-score is multiplied by the enrichment's audience authenticity read: Looks Genuine 1.0, Some Red Flags 0.85, Likely Inflated 0.7, Not Assessed 1.0 (absence is not penalized). Modest on purpose, because the read is an estimate. Applied after the median cap and before ranking; dampened creators carry an amber "Authenticity" badge and a note in their explanation. The raw "Fake Followers %" column is not used: only 45 of 115 creators have it, so using it would spare the rest a penalty.
+
 **Eligibility**: complete records only; accounts normalized to category "Other" (venues, off-domain) are excluded and logged.
 
-**Ranking**: sort by final score, ties broken by handle, so output is stable.
+**Ranking and ties (v2)**: sort by final score. Scores within 0.1 points (`TIE_EPSILON`) of a group's top score are a tie, ordered by measured location first, then location fit, engagement, and handle A-Z. Every member of a tie is within 0.1 points of every other, so genuinely different scores never swap. Tied creators get a note saying how the tie was resolved.
 
 ## Requirements, filters and scope (`shortlist.py`, `api.py`)
 
@@ -108,7 +110,7 @@ Row-level security is enabled with no policies: the public anon key can read not
 
 ## Testing
 
-60 pytest tests cover normalization, validation rules, scoring guarantees (determinism, tier ordering, exclusions, ER outliers, partial credit, caps), the budget filter, scope guard, Supabase round-trip (via an in-memory PostgREST fake), PII stripping, the history list, and every API endpoint. Tests pick creators by their data (e.g. "highest ER"), never by name. CI runs the subset that does not need the private workbook, plus a frontend type-check, lint and production build.
+69 pytest tests cover normalization, validation rules, scoring guarantees (determinism, tier ordering, exclusions, ER outliers, partial credit, caps, tie-breaking, authenticity dampening), the budget filter, scope guard, Supabase round-trip (via an in-memory PostgREST fake), PII stripping, the history list, and every API endpoint. Tests pick creators by their data (e.g. "highest ER"), never by name. CI runs the subset that does not need the private workbook, plus a frontend type-check, lint and production build.
 
 ## Decisions worth knowing
 

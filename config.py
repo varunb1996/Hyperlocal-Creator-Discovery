@@ -52,6 +52,20 @@ SHORTLIST_SIZE = 5
 # Pilot scope: creator pool is Pune-area only. Other cities are accepted but get a not-supported message, no list.
 PILOT_CITY = "Pune"
 
+# Authenticity dampener: engagement sub-score x multiplier, by the enrichment's "Engagement Authenticity Read".
+# Modest on purpose: the read is an estimate, not proof. Unknown/absent values -> 1.0 (absence is not penalized).
+AUTHENTICITY_MULTIPLIER = {
+    "Looks Genuine": 1.0,
+    "Some Red Flags": 0.85,
+    "Likely Inflated": 0.7,
+    "Not Assessed": 1.0,
+}
+
+# Tie-breaker: final scores within TIE_EPSILON (0-1 scale; 0.001 = 0.1 points) count as tied and are ordered by
+# location tier (this order: measured beats inferred), then location fit, then engagement, then handle A-Z.
+TIE_EPSILON = 0.001
+TIE_TIER_ORDER = ["Verified", "Proxy", "Unknown"]
+
 # Eligibility
 EXCLUDED_CATEGORIES = {"Other"}  # venue/business (and off-domain) accounts, not creators
 REQUIRED_FIELDS = ["Username", "ER%", "content_tone", "Posting Pace Category"]

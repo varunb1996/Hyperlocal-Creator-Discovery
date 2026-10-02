@@ -21,6 +21,8 @@ The API runs on Render's free plan and sleeps when idle: the first request after
 
 - **Ranks creators on three factors:** location fit (50%), content-tone match (30%) and engagement (20%).
 - **Shows confidence, not just scores.** Green = measured or cross-checked, amber = inferred or not cross-checked. A creator whose Pune relevance is only inferred can never outrank one with a measured Pune audience.
+- **Nudges down questionable audiences (v2).** A creator whose audience authenticity read is "Some Red Flags" or "Likely Inflated" has their engagement scaled by 0.85 or 0.7, shown with an amber badge.
+- **Resolves near-ties clearly (v2).** Scores within 0.1 points are ordered by measured location first, then location fit, engagement and handle, with a note on the card.
 - **Explains every rank** in five plain lines (overall, location, content, engagement, estimated rate).
 - **Optional budget filter** (off by default) hides creators whose *estimated* rate is above the café's max spend. It only hides rows; it never re-orders or re-scores, and hidden higher ranks are listed with the reason.
 - **Saves every shortlist** with its brief; a **History** page lists past shortlists and reopens any of them.
@@ -57,7 +59,7 @@ See **[ARCHITECTURE.md](ARCHITECTURE.md)** for how it works and why, and **[DEPL
 │   ├── mapping_tables.xlsx   Free-text → vocabulary mapping (the normalization spec)
 │   ├── vocab.json            Fixed vocabulary, exported by seed.py (used by the API)
 │   └── creator_workbook.xlsx Creator data — PRIVATE, not in this repo (see Data)
-├── tests/            60 tests (pytest)
+├── tests/            69 tests (pytest)
 ├── web/              Next.js frontend
 ├── render.yaml       Render blueprint for the API
 └── .github/workflows/ci.yml
@@ -115,7 +117,7 @@ Open http://localhost:3000.
 python -m pytest -v
 ```
 
-With the workbook present, all 60 tests run (one also checks live Supabase when `SUPABASE_URL` is set). Without it — as on GitHub CI — data-dependent tests skip with a reason and the synthetic, validation-rule and API-boot tests still run.
+With the workbook present, all 69 tests run (one also checks live Supabase when `SUPABASE_URL` is set). Without it — as on GitHub CI — data-dependent tests skip with a reason and the synthetic, validation-rule and API-boot tests still run.
 
 ## Configuration
 
