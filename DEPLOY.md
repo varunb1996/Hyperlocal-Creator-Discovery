@@ -53,6 +53,21 @@ The free plan sleeps after ~15 minutes idle; the first request then takes ~30–
 
 Push to `main`. CI runs, and Render and Vercel redeploy automatically. To refresh creator data, update the private workbook and run `python seed.py` again (upserts by handle).
 
+### Upgrading a database created before a schema change
+
+A fresh project gets everything from `schema.sql`. A project created earlier needs the added columns, in this order, **before** pushing code that uses them:
+
+1. **SQL Editor** → run the `alter table … add column if not exists …` lines at the end of [`schema.sql`](schema.sql) (safe to re-run):
+   ```sql
+   alter table shortlists add column if not exists skipped jsonb not null default '[]';  -- v1: skipped ranks
+   alter table creators   add column if not exists authenticity text;                  -- v2: authenticity dampener
+   ```
+2. Re-seed so existing creators get the new values: `python seed.py`.
+3. Check: `python -m pytest -v`. The live test compares Supabase rankings with the file and must pass.
+4. Push to `main`.
+
+Shortlists saved before an upgrade keep the scores they were created with; new briefs use the current scorer.
+
 ## Secrets checklist
 
 - Real keys exist only in local `.env` / `web/.env.local` (both gitignored) and in Render/Vercel settings.
