@@ -50,6 +50,13 @@ def test_genuinely_different_scores_never_reorder():
     assert handles(order(chain)) == ["@a", "@b", "@c"]  # c is 0.0015 below a: not tied with a
 
 
+def test_zero_or_negative_epsilon_means_no_ties(monkeypatch):
+    for eps in (0, -1):  # any config value must terminate; <= 0 just turns tie-grouping off
+        monkeypatch.setattr(cfg, "TIE_EPSILON", eps)
+        rows = [row("@b", 0.5, "Proxy", 0.6), row("@a", 0.5004, "Proxy", 0.6)]
+        assert handles(order(rows)) == ["@a", "@b"]
+
+
 def test_tie_order_is_reproducible_under_shuffle():
     rows = [row(f"@c{i}", 0.5 + (i % 3) * 0.0003, ["Verified", "Proxy"][i % 2], 0.6 + (i % 4) * 0.01, (i % 5) / 10)
             for i in range(12)]

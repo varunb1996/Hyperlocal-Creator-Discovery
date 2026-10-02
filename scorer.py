@@ -218,7 +218,7 @@ def order(rows):
     rows = sorted(rows, key=lambda r: (-r["_sort"][0], _tie_key(r)))
     out, i = [], 0
     while i < len(rows):
-        top, j = rows[i]["_sort"][0], i
+        top, j = rows[i]["_sort"][0], i + 1  # a group always holds its own top row, whatever TIE_EPSILON is
         while j < len(rows) and top - rows[j]["_sort"][0] <= cfg.TIE_EPSILON + 1e-12:
             j += 1
         group = sorted(rows[i:j], key=_tie_key)
